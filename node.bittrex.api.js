@@ -29,7 +29,7 @@ var NodeBittrexApi = function(options) {
 
   var opts = {
     baseUrl: 'https://bittrex.com/api/v1.1',
-    baseUrlv2: 'https://bittrex.com/Api/v2.0',
+    baseUrlv2: 'https://international.bittrex.com/api/v2.0',
     websockets_baseurl: 'wss://socket.bittrex.com/signalr',
     websockets_hubs: ['CoreHub'],
     apikey: 'APIKEY',
@@ -186,7 +186,7 @@ var NodeBittrexApi = function(options) {
     if (force) {
       try { wsclient.end(); } catch (e) {}
     }
-    
+
     if (!websocketWatchDog) {
       websocketWatchDog = setInterval(function() {
         if (!wsclient) {
@@ -202,7 +202,7 @@ var NodeBittrexApi = function(options) {
         ) {
           var now = (new Date()).getTime();
           var diff = now - websocketLastMessage;
-  
+
           if (diff > 60 * 1000) {
             ((opts.verbose) ? console.log('Websocket Watch Dog: Websocket has not received communication for over 1 minute. Forcing reconnection. Ruff!') : '');
             connectws(callback, true);
@@ -323,7 +323,7 @@ var NodeBittrexApi = function(options) {
       if (callback) {
         callback(wsclient);
       }
-      
+
     }, opts.cloudscraper_headers || {});
 
     return wsclient;
